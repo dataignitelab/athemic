@@ -1,0 +1,20 @@
+version: '3'
+services:
+  disage:
+    image: dataignitelab/entropy:0.0.1
+    container_name: entropy
+    ports:
+      - "8502:8502/tcp"
+    environment:
+      mongo_host: mongodb
+      mongo_user: dataignite
+      mongo_passwd: dataignite
+      auth_source: datastore
+      redis_host: redis_disage
+      minio_host: minio:9000
+    networks:
+      - dataignite
+
+networks:
+  dataignite:
+    external: true

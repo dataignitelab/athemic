@@ -1,0 +1,82 @@
+version: '3'
+services:
+  redis:
+    image: redis:6.2.6-alpine
+    container_name: redis_disage
+    ports:
+      - 6379:6379
+    networks:
+      - dataignite
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq_disage
+    restart: always
+    ports:
+      - 5672:5672
+      - 8080:15672
+    networks:
+      - dataignite
+
+
+  minio:
+    image:  minio/minio
+    command: server /data --console-address ":9001"
+    container_name: minio
+    environment:
+      MINIO_ROOT_USER: dataignite
+      MINIO_ROOT_PASSWORD: dataignite
+      MINIO_ACCESS_KEY: dataignite
+      MINIO_SECRET_KEY: dataignite
+      MINIO_SERVER_URL: http://minio:9000
+      TZ: Asia/Seoul
+    restart: always
+    shm_size: '10gb'
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./minio/data:/data
+    networks:
+      - dataignite
+
+  minio-client:
+    image: minio/mc
+    depends_on:
+      - minio
+    volumes:
+      - ./storage/minio/dataset:/temp/data/
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config;
+      /usr/bin/mc alias set minio_di http://minio:9000 dataignite dataignite;
+      /usr/bin/mc mb minio_di/dataset;
+      /usr/bin/mc cp -r /temp/data/ minio_di/dataset;
+      exit 0;
+      "
+    networks:
+      - dataignite
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./storage/mongodb/mongodbdata:/data/db
+      - ./storage/mongodb/init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=dataignite
+      - MONGO_INITDB_DATABASE=admin
+    networks:
+      - dataignite
+
+volumes:
+  mongodbdata:
+    driver: local
+
+networks:
+  dataignite:
+    external: true

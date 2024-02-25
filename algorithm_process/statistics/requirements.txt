@@ -1,0 +1,7 @@
+pandas==2.0.3
+pika==1.2.0
+minio==7.2.0
+redis==5.0.1
+xlrd==2.0.1
+async-timeout==4.0.3
+elasticsearch==8.12.0
