@@ -86,4 +86,14 @@
 	    B. Run from local image
             docker run -d --network dataignite -e mqbroker=rabbitmq_disage -e minio_host=minio:9000 -e redis_host=redis_disage --name randomforestregression randomforestregression						
 	
-    
+### Manual    
+#### BOLTZMAN Machine Learning web engine manual
+https://datacentric-rnd.notion.site/BOLTZMAN-78ccb7e2eccc4bc2906cceccfc6ae63f?pvs=4
+
+#### ENTROPY Data Engine web engine manual
+https://datacentric-rnd.notion.site/ENTROPY-f36ef383a3304190a8555a6bd076e9ae
+
+### Communication
+GitHub Issues: mainly for bug reports, new feature requests, question asking, etc.
+
+
