@@ -4,6 +4,7 @@ RUN mkdir /work
 WORKDIR /work
 ADD StorageManage ./StorageManage
 ADD boot.py ./boot.py
+ADD dilogger.py ./dilogger.py
 ADD requirements.txt ./requirements.txt
 
 RUN apt-get update -y

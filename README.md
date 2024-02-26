@@ -16,8 +16,13 @@
     docker network create dataignite
 	
 	3. Run from docker hub
+        cd BOLTZMAN
 		docker-compose --file docker-compose.yaml up -d
-		
+        
+        open
+        http://localhost:8501/
+
+             
 	4. Run ML Container from docker hub
 		A. Statistics
             docker run -d --network dataignite -e mqbroker=rabbitmq_disage -e minio_host=minio:9000 -e redis_host=redis_disage --name statistic dataignitelab/statistic:0.0.1
@@ -29,7 +34,11 @@
             docker run -d --network dataignite -e mqbroker=rabbitmq_disage -e minio_host=minio:9000 -e redis_host=redis_disage --name randomforestregression dataignitelab/randomforestregression:0.0.1
 	
 	5. Run ENTROPY DataEngine Container from docker hub
-		docker run -d --network dataignite -e mqbroker=rabbitmq_disage -e minio_host=minio:9000 -e redis_host=redis_disage -e mongo_host=mongodb -e mongo_user=dataignite -e mongo_passwd=dataignite -e auth_source=datastore --name entropy dataignitelab/entropy:0.0.1
+        cd ENTROPY
+     	docker-compose --file docker-compose.yaml up -d
+        open
+        http://localhost:8501/
+
 	
 ### Run with build process
     1. BOLTZMAN Machine Learning web engine

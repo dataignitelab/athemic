@@ -20,7 +20,6 @@ import itertools
 import socket
 import logging
 import boto3
-import logstash
 from trino.dbapi import connect as trino_conn
 from io import StringIO
 import io
