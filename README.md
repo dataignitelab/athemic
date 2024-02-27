@@ -1,4 +1,4 @@
-# DataIgnite Athena Project
+# DataIgnite Athemic Project
 ## Project Structure
     - BOLTZMAN : Web Engine to control AI Module (classification, regression, statistics)
     - ENTROPY : data ingestion engine for BOLTMAN SYSTEM
