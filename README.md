@@ -38,7 +38,7 @@
         cd ENTROPY
      	docker-compose --file docker-compose.yaml up -d
         open
-        http://localhost:8501/
+        http://localhost:8502/
 
 	
 ### Run with build process
