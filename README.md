@@ -11,6 +11,7 @@
 
     1. Clone this repository
     git clone https://github.com/dataignitelab/Athena
+    If you want to use sample data, you must clone this repository
 
     2. Network
     docker network create dataignite
