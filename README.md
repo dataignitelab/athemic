@@ -5,13 +5,13 @@
     - AI Module : This project supply general machine learning algorithm
               Now you can use randomforest classification / regression / descriptive statistics
 
-![](C:\Users\prismdata\Documents\gitlab\athemic\features\archi.png)
+![](/features/archi.png)
 
 BOLTZMAN Machine Learning
-![](C:\Users\prismdata\Documents\gitlab\athemic\features\BOLTZMAN.png)
+![](/features/BOLTZMAN.png)
 
 ENTROPY Data Manager
-![](C:\Users\prismdata\Documents\gitlab\athemic\features\ENTROPY.png)
+![](/features/ENTROPY.png)
 
 ## 1. How to Run 
 ### Run without build process 
