@@ -1330,7 +1330,7 @@ def main():
             else:
                 st.info(f"{item_caption['link_no_storage'][session['LANG']]}")
 
-        elif session["DPM_SESSION"]["MIGRATION_CHANNEL"] == f"{item_caption['op_link_aws'][session['LANG']]}":
+        elif session["DPM_SESSION"]["MIGRATION_CHANNEL"] == f"{item_caption['op_link_aws'][session['LANG']]}": # AWS migration
             option_aws_mig_list = ["S3"]
             opt_index = get_IndexofWidget(session["DPM_SESSION"], option_aws_mig_list, "AWS_SVC")
             st.selectbox(label=f"{item_caption['aws_service'][session['LANG']]}",
@@ -1353,29 +1353,28 @@ def main():
                 session["DPM_SESSION"] = upsert_sessiondb_redis(session["DPM_SESSION"], "AWS_BUCKET",
                                                                 session.AWS_BUCKET)
 
-            s3_bucket_object_infos = get_aws_s3_all_infos(session["DPM_SESSION"]["AWS_BUCKET"])
-            if len(s3_bucket_object_infos) > 0:
-                object_list = [ s3_bucket_object_info["Object Name"] for s3_bucket_object_info in  s3_bucket_object_infos]
-                opt_index = get_IndexofWidget(session["DPM_SESSION"], object_list, "AWS_S3_OBJECT")
-                st.selectbox(label=f"{item_caption['aws_file'][session['LANG']]}",
-                             options=object_list,
-                             index=opt_index,
-                             key="AWS_S3_OBJECT",
-                             on_change=on_change_aws_object_info)
-                session["DPM_SESSION"] = upsert_sessiondb_redis(session["DPM_SESSION"], "AWS_S3_OBJECT",
-                                                                session.AWS_S3_OBJECT)
+                s3_bucket_object_infos = get_aws_s3_all_infos(session["DPM_SESSION"]["AWS_BUCKET"])
+                if len(s3_bucket_object_infos) > 0:
+                    object_list = [ s3_bucket_object_info["Object Name"] for s3_bucket_object_info in  s3_bucket_object_infos]
+                    opt_index = get_IndexofWidget(session["DPM_SESSION"], object_list, "AWS_S3_OBJECT")
+                    st.selectbox(label=f"{item_caption['aws_file'][session['LANG']]}",
+                                 options=object_list,
+                                 index=opt_index,
+                                 key="AWS_S3_OBJECT",
+                                 on_change=on_change_aws_object_info)
+                    session["DPM_SESSION"] = upsert_sessiondb_redis(session["DPM_SESSION"], "AWS_S3_OBJECT",
+                                                                    session.AWS_S3_OBJECT)
 
-                bucket_name = session["DPM_SESSION"]["AWS_BUCKET"]
-                file_name = session["DPM_SESSION"]["AWS_S3_OBJECT"]
-                bucket_access_info = get_document_mongo("etl_AWS_S3", "bucket_name", bucket_name)
-                region = bucket_access_info["aws_region"]
-                access_key = bucket_access_info["access_key"]
-                secret_key = bucket_access_info["secret_key"]
-                bucket_name = bucket_access_info["bucket_name"]
-                update_aws_s3_bucket_object_info(region, access_key, secret_key, bucket_name, file_name)
+                    bucket_name = session["DPM_SESSION"]["AWS_BUCKET"]
+                    file_name = session["DPM_SESSION"]["AWS_S3_OBJECT"]
+                    bucket_access_info = get_document_mongo("etl_AWS_S3", "bucket_name", bucket_name)
+                    region = bucket_access_info["aws_region"]
+                    access_key = bucket_access_info["access_key"]
+                    secret_key = bucket_access_info["secret_key"]
+                    bucket_name = bucket_access_info["bucket_name"]
+                    update_aws_s3_bucket_object_info(region, access_key, secret_key, bucket_name, file_name)
             else:
                 st.info(f"{item_caption['link_no_storage'][session['LANG']]}")
-
         elif session["DPM_SESSION"]["MIGRATION_CHANNEL"] == "BigDataEngine":
             st.write(f"{item_caption['trino_schema_list'][session['LANG']]}")
             link_trino_catalogs = get_etl_trino_catalogs_mongo()
