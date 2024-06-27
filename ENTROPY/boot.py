@@ -330,7 +330,7 @@ def get_table(full_table, sel_input):
 #@st.cache_resource
 def get_allcolumn_table(_db_conn, stored_default):
     sql = f"SELECT "
-    sql = sql + ",".join(stored_default)
+    sql = sql + ",".join(f"`{value}`" for value in stored_default)
     sql = sql + f' FROM {session["DPM_SESSION"]["MIG_DATA_NAME"]}'
     all_col_table = _db_conn.query(sql)
     return all_col_table
@@ -1432,8 +1432,8 @@ def main():
                     secret_key = bucket_access_info["secret_key"]
                     bucket_name = bucket_access_info["bucket_name"]
                     update_aws_s3_bucket_object_info(region, access_key, secret_key, bucket_name, file_name)
-                else:
-                    st.info(f"{item_caption['link_no_storage'][session['LANG']]}")
+            else:
+                st.info(f"{item_caption['link_no_storage'][session['LANG']]}")
 
         elif session["DPM_SESSION"]["MIGRATION_CHANNEL"] == "BigDataEngine":
             st.write(f"{item_caption['trino_schema_list'][session['LANG']]}")
