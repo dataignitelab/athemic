@@ -33,7 +33,7 @@ item_caption={
 'inout_not_db':{'kor':'등록된 DB가 존재하지 않습니다.','eng':'The registered DB does not exist.'},
 'inout_try_conn':{'kor':'DB 등록을 통해 연계를 설정하세요.','eng':'Try establishing a connection through DB registration.'},
 'inout_sel_db':{'kor':'DataBase를 선택하세요','eng':'Select a DataBase'},
-'inout_connect':{'kor':'{}에 연결 완료"','eng':'Connection to {} complete'},
+'inout_connect':{'kor':'{}에 연결 완료','eng':'Connection to {} complete'},
 'inout_table_list':{'kor':'테이블 목록','eng':'List of tables'},
 'inout_sel_table':{'kor':'대상 테이블 선택','eng':'Select the target table'},
 

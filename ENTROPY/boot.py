@@ -551,10 +551,10 @@ def analysis_migraion_inoutbound_data(bound, sys_name):
             tables_df = db_conn.query("SHOW TABLES")
 
             st.info(f"{item_caption['inout_connect'][session['LANG']].format(url)}")
-            tables_df.rename(columns={"Tables_in_kaggle": f"{item_caption['inout_table_list'][session['LANG']]}"}, inplace=True)
+            tables_df.rename(columns={"Tables_in_{}".format(MIG_TARGET_DB_NAME): item_caption['inout_table_list'][session['LANG']]}, inplace=True)
             st.dataframe(tables_df, height=150, width=700, hide_index=True)
 
-            taget_tables = tables_df[f"{item_caption['inout_table_list'][session['LANG']]}"].values.tolist()
+            taget_tables = tables_df[item_caption['inout_table_list'][session['LANG']]].values.tolist()
             opt_index = get_IndexofWidget(session["DPM_SESSION"], taget_tables, "MIG_DATA_NAME")
             st.selectbox(label=f"{item_caption['inout_sel_table'][session['LANG']]}",
                          options=taget_tables,
