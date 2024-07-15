@@ -4,7 +4,7 @@ services:
     image: dataignitelab/boltzman:0.0.1
     container_name: boltzman
     ports:
-      - "8601:8501/tcp"
+      - "8501:8501/tcp"
     environment:
       minio_host: minio:9000
       redis_host: redis_disage
